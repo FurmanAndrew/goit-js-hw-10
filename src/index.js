@@ -15,17 +15,14 @@ refs.searchCountry.addEventListener('input', debounce(sadsa, DEBOUNCE_DELAY));
 function sadsa() {
     let search = refs.searchCountry.value.trim();
     if (search === '') {
-        return clearCountryList(),
-            clearInfoCountry();
+        return clearAll();
     }
     fetchCountries(search)
         .then(country => markupArticles(country))
         .catch(error => {
         Notiflix.Notify.failure('Oops, there is no country with that name');
-            clearCountryList(),
-            clearInfoCountry();
+            clearAll();
       });
-    console.log(fetchCountries(search));
     console.log(search);
     
 }
@@ -71,4 +68,9 @@ function clearCountryList() {
 
 function clearInfoCountry() {
     refs.infoAboutCountry.innerHTML = '';
+}
+
+function clearAll() {
+    refs.infoAboutCountry.innerHTML = '';
+    refs.resultSearch.innerHTML = '';
 }
